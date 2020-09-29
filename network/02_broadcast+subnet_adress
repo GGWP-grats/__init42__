@@ -1,0 +1,7 @@
+#print eth0 broadcast ip addr
+ifconfig | grep -A 1 eth0 | grep broadcast | awk '{print $NF}'
+
+#identify all IP adresses which are part of same subnet
+
+ip addr | grep -A 2 'eth0:' | grep inet | awk '{print $2}' > ip.txt
+nmap -sn -iL ip.txt | grep report | awk '{print $NF}'
